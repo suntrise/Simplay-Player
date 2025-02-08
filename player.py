@@ -33,7 +33,7 @@ def main(page):
     page.window_min_width = 540
     page.padding = 10
     page.title = "Simplay Player"
-    page.window_center()
+    page.window.center()
     # page.window_title_bar_hidden = True
     log_init.logging.info("Window created")
 
@@ -49,7 +49,7 @@ def main(page):
     else:
         page.rtl = False
 
-    page.theme = ft.Theme(color_scheme_seed = ft.colors.BLUE)
+    page.theme = ft.Theme(color_scheme_seed = ft.Colors.BLUE)
     if lang.langInfo["font"] == "":
         page.fonts = {"Inter": "./asset/Inter.ttc"}
         page.theme = ft.Theme(font_family = "Inter")
@@ -105,7 +105,7 @@ def main(page):
     def alwaysOnTop(e):
         if page.window_always_on_top == False:
             page.window_always_on_top = True
-            windowOnTop_btn.icon = ft.icons.PUSH_PIN
+            windowOnTop_btn.icon = ft.Icons.PUSH_PIN
             windowOnTop_btn.tooltip = lang.tooltips["cancelAlwaysOnTop"]
             '''
             page.snack_bar = ft.SnackBar(ft.Text(value = lang.mainMenu["beenTop"]))
@@ -113,7 +113,7 @@ def main(page):
             '''
         elif page.window_always_on_top == True:
             page.window_always_on_top = False
-            windowOnTop_btn.icon = ft.icons.PUSH_PIN_OUTLINED
+            windowOnTop_btn.icon = ft.Icons.PUSH_PIN_OUTLINED
             windowOnTop_btn.tooltip = lang.tooltips["alwaysOnTop"]
             '''
             page.snack_bar = ft.SnackBar(ft.Text(value = lang.mainMenu["beenUntop"]))
@@ -272,7 +272,7 @@ def main(page):
         page.update()
 
     # 播放列表类
-    class audioTile(ft.UserControl):
+    class audioTile(ft.Container):                                # ft.UserControl已经被废弃, 现在程序无法工作估计就是它的原因了
         def __init__(self, song):
             super().__init__()
             self.song = song
@@ -285,9 +285,9 @@ def main(page):
 
         def build(self):
             return ft.Row(controls = [
-                        ft.Icon(name = ft.icons.MUSIC_NOTE_OUTLINED),
+                        ft.Icon(name = ft.Icons.MUSIC_NOTE_OUTLINED),
                         ft.Text(self.songName, width = 200),
-                        ft.IconButton(icon = ft.icons.PLAY_CIRCLE_FILLED_OUTLINED, on_click = self.playSong)
+                        ft.IconButton(icon = ft.Icons.PLAY_CIRCLE_FILLED_OUTLINED, on_click = self.playSong)
                     ],
                     width = 300
                 )
@@ -331,12 +331,12 @@ def main(page):
             lyrics_before.visible = False
             lyrics_text.visible = False
             lyrics_after.visible = False
-            lyrics_btn.icon = ft.icons.LYRICS_OUTLINED
+            lyrics_btn.icon = ft.Icons.LYRICS_OUTLINED
         elif lyrics_text.visible == False:
             lyrics_before.visible = True
             lyrics_text.visible = True
             lyrics_after.visible = True
-            lyrics_btn.icon = ft.icons.LYRICS
+            lyrics_btn.icon = ft.Icons.LYRICS
         page.update()
 
     def ctrlRowUpdate():
@@ -375,9 +375,9 @@ def main(page):
     def enableOrDisableRepeat(e):
         work.enableOrDisableRepeat(e)
         if work.loopOpen == False:
-            playInRepeat_btn.icon = ft.icons.REPEAT_ONE_OUTLINED
+            playInRepeat_btn.icon = ft.Icons.REPEAT_ONE_OUTLINED
         elif work.loopOpen == True:
-            playInRepeat_btn.icon = ft.icons.REPEAT_ONE_ON_OUTLINED
+            playInRepeat_btn.icon = ft.Icons.REPEAT_ONE_ON_OUTLINED
         page.update()
         log_init.logging.info("Page updated")
     
@@ -440,8 +440,8 @@ def main(page):
                 width = 400
             ),
             actions = [
-                ft.TextButton(text = lang.dialog["cancel"], icon = ft.icons.CLOSE_OUTLINED, on_click = closeSongWeb_dlg),
-                ft.FilledButton(text = lang.dialog["ok"], icon = ft.icons.CHECK_OUTLINED, on_click = audioFromUrlInfo)
+                ft.TextButton(text = lang.dialog["cancel"], icon = ft.Icons.CLOSE_OUTLINED, on_click = closeSongWeb_dlg),
+                ft.FilledButton(text = lang.dialog["ok"], icon = ft.Icons.CHECK_OUTLINED, on_click = audioFromUrlInfo)
             ],
             actions_alignment = ft.MainAxisAlignment.END
         )
@@ -493,12 +493,12 @@ def main(page):
                     ft.Row(controls = [
                         ft.TextButton(
                             text = lang.dialog["cancel"],
-                            icon = ft.icons.CLOSE_OUTLINED,
+                            icon = ft.Icons.CLOSE_OUTLINED,
                             on_click = closeFindUpdDlg
                         ),
                         ft.FilledButton(
                             text = lang.dialog["update"],
-                            icon = ft.icons.UPLOAD_OUTLINED,
+                            icon = ft.Icons.UPLOAD_OUTLINED,
                             url = downloadUrl
                         )
                     ],
@@ -515,13 +515,13 @@ def main(page):
     def openAboutDlg(e):
         about_dlg = ft.AlertDialog(
             title = ft.Text(value = lang.mainMenu["about"]),
-            content = ft.Markdown("__Simplay Player__\n\rby WhatDamon & open source community\n\r- Version: " + ver + "\n\r- Powered by: Flet, Tinytag\n\r- Python: " + platform.python_version() + "\n\r- OS: " + platform.platform() + "-" + platform.machine(), selectable = True),
+            content = ft.Markdown("__Simplay Player__\n\rMaintained by suntrise & open source community\n\rFormally by WhatDamon\n\r- Version: " + ver + "\n\r- Powered by: Flet, Tinytag\n\r- Python: " + platform.python_version() + "\n\r- OS: " + platform.platform() + "-" + platform.machine(), selectable = True),
             actions = [
                 ft.Row(controls = [
                     ft.TextButton(
                         text = lang.dialog["githubRepo"],
-                        icon = ft.icons.COLLECTIONS_BOOKMARK_OUTLINED,
-                        url = "https://github.com/WhatDamon/Simplay-Player/"
+                        icon = ft.Icons.COLLECTIONS_BOOKMARK_OUTLINED,
+                        url = "https://github.com/suntrise/Simplay-Player/"
                     )
                 ],
                 alignment = ft.MainAxisAlignment.END
@@ -554,8 +554,8 @@ def main(page):
             ft.WindowDragArea(
                 ft.Container(
                     ft.Row(controls = [
-                        ft.Row(controls = [ft.Icon(ft.icons.MUSIC_NOTE_OUTLINED, size = 20), ft.Text(page.title)]),
-                        ft.Row(controls = [ft.IconButton(ft.icons.CLOSE, icon_size = 16, on_click = closeWindow)])
+                        ft.Row(controls = [ft.Icon(ft.Icons.MUSIC_NOTE_OUTLINED, size = 20), ft.Text(page.title)]),
+                        ft.Row(controls = [ft.IconButton(ft.Icons.CLOSE, icon_size = 16, on_click = closeWindow)])
                     ],
                     alignment = ft.MainAxisAlignment.SPACE_BETWEEN
                     )
@@ -569,15 +569,15 @@ def main(page):
 
     # 窗口置顶按钮
     windowOnTop_btn = ft.IconButton(
-        icon = ft.icons.PUSH_PIN_OUTLINED,
+        icon = ft.Icons.PUSH_PIN_OUTLINED,
         tooltip = lang.tooltips["alwaysOnTop"],
         on_click = alwaysOnTop
     )
 
     # 机翻警告
     machineTranslateWarning_icon = ft.Icon(
-        ft.icons.WARNING_AMBER_OUTLINED,
-        color = ft.colors.AMBER,
+        ft.Icons.WARNING_AMBER_OUTLINED,
+        color = ft.Colors.AMBER,
         tooltip = lang.infomation["machineTranslate"],
         visible = False
     )
@@ -596,32 +596,32 @@ def main(page):
                     controls = [
                         ft.MenuItemButton(
                             content = ft.Text(value = lang.menuBar["openFile"]),
-                            leading = ft.Icon(ft.icons.FILE_OPEN_OUTLINED),
+                            leading = ft.Icon(ft.Icons.FILE_OPEN_OUTLINED),
                             on_click = lambda _: pickFilesDialog.pick_files(allowed_extensions = ["mp3", "flac", "m4a", "wav", "aac"]),
                         ),
                         ft.MenuItemButton(
                             content = ft.Text(value = lang.menuBar["openSonglist"]),
-                            leading = ft.Icon(ft.icons.PLAYLIST_ADD_OUTLINED),
+                            leading = ft.Icon(ft.Icons.PLAYLIST_ADD_OUTLINED),
                             on_click = lambda _: pickSonglistDialog.get_directory_path(),
                         ),
                         ft.SubmenuButton(
                             content = ft.Text(value = lang.menuBar["getFromMusicWebsite"]),
-                            leading = ft.Icon(ft.icons.TRAVEL_EXPLORE_OUTLINED),
+                            leading = ft.Icon(ft.Icons.TRAVEL_EXPLORE_OUTLINED),
                             controls = [
                                 ft.MenuItemButton(
                                     content = ft.Text(value = lang.menuBar["getWebMusic"]),
-                                    leading = ft.Icon(ft.icons.MUSIC_NOTE_OUTLINED),
+                                    leading = ft.Icon(ft.Icons.MUSIC_NOTE_OUTLINED),
                                     on_click = getSongFromWebsite
                                 ),
                                 ft.MenuItemButton(
                                     content = ft.Text(value = lang.menuBar["getWebAlbum"]),
-                                    leading = ft.Icon(ft.icons.ALBUM_OUTLINED)
+                                    leading = ft.Icon(ft.Icons.ALBUM_OUTLINED)
                                 )
                             ]
                         ),
                         ft.MenuItemButton(
                             content = ft.Text(value = lang.menuBar["exit"]),
-                            leading = ft.Icon(ft.icons.EXIT_TO_APP_OUTLINED),
+                            leading = ft.Icon(ft.Icons.EXIT_TO_APP_OUTLINED),
                             on_click = closeWindow
                         )
                     ]
@@ -631,102 +631,102 @@ def main(page):
                     controls = [
                         ft.SubmenuButton(
                             content = ft.Text(value = lang.menuBar["channels"]),
-                            leading = ft.Icon(ft.icons.TUNE_OUTLINED),
+                            leading = ft.Icon(ft.Icons.TUNE_OUTLINED),
                             controls = [
                                 ft.MenuItemButton(
                                     content = ft.Text(value = lang.menuBar["balance"]),
-                                    leading = ft.Icon(ft.icons.WIDTH_NORMAL),
+                                    leading = ft.Icon(ft.Icons.WIDTH_NORMAL),
                                     on_click = work.balanceMiddle
                                 ),
                                 ft.MenuItemButton(
                                     content = ft.Text(value = lang.menuBar["shiftLeft"]),
-                                    leading = ft.Icon(ft.icons.ARROW_BACK_OUTLINED),
+                                    leading = ft.Icon(ft.Icons.ARROW_BACK_OUTLINED),
                                     on_click = work.balanceLeft
                                 ),
                                 ft.MenuItemButton(
                                     content = ft.Text(value = lang.menuBar["shiftRight"]),
-                                    leading = ft.Icon(ft.icons.ARROW_FORWARD_OUTLINED),
+                                    leading = ft.Icon(ft.Icons.ARROW_FORWARD_OUTLINED),
                                     on_click = work.balanceRight
                                 )
                             ]
                         ),
                         ft.SubmenuButton(
                             content = ft.Text(value = lang.menuBar["position"]),
-                            leading = ft.Icon(ft.icons.TIMER_OUTLINED),
+                            leading = ft.Icon(ft.Icons.TIMER_OUTLINED),
                             controls = [
                                 ft.MenuItemButton(
                                     content = ft.Text(value = lang.menuBar["forward10s"]),
-                                    leading = ft.Icon(ft.icons.ARROW_FORWARD_OUTLINED),
+                                    leading = ft.Icon(ft.Icons.ARROW_FORWARD_OUTLINED),
                                     on_click = work.audioForward10sec
                                 ),
                                 ft.MenuItemButton(
                                     content = ft.Text(value = lang.menuBar["back10s"]),
-                                    leading = ft.Icon(ft.icons.ARROW_BACK_OUTLINED),
+                                    leading = ft.Icon(ft.Icons.ARROW_BACK_OUTLINED),
                                     on_click = work.audioBack10sec
                                 )
                             ]
                         ),
                         ft.SubmenuButton(
                             content = ft.Text(value = lang.menuBar["speed"]),
-                            leading = ft.Icon(ft.icons.SPEED_OUTLINED),
+                            leading = ft.Icon(ft.Icons.SPEED_OUTLINED),
                             controls = [
                                 ft.MenuItemButton(
                                     content = ft.Text(value = lang.menuBar["0.5x"]),
-                                    leading = ft.Icon(ft.icons.ARROW_BACK_OUTLINED),
+                                    leading = ft.Icon(ft.Icons.ARROW_BACK_OUTLINED),
                                     on_click = work.rateChangeTo05
                                 ),
                                 ft.MenuItemButton(
                                     content = ft.Text(value = lang.menuBar["1x"]),
-                                    leading = ft.Icon(ft.icons.ONE_X_MOBILEDATA_OUTLINED),
+                                    leading = ft.Icon(ft.Icons.ONE_X_MOBILEDATA_OUTLINED),
                                     on_click = work.rateChangeTo10
                                 ),
                                 ft.MenuItemButton(
                                     content = ft.Text(value = lang.menuBar["1.5x"]),
-                                    leading = ft.Icon(ft.icons.ARROW_FORWARD_OUTLINED),
+                                    leading = ft.Icon(ft.Icons.ARROW_FORWARD_OUTLINED),
                                     on_click = work.rateChangeTo15
                                 ),
                                 ft.MenuItemButton(
                                     content = ft.Text(value = lang.menuBar["2x"]),
-                                    leading = ft.Icon(ft.icons.ROCKET_LAUNCH_OUTLINED),
+                                    leading = ft.Icon(ft.Icons.ROCKET_LAUNCH_OUTLINED),
                                     on_click = work.rateChangeTo20
                                 )
                             ]
                         ),
                         ft.MenuItemButton(
                             content = ft.Text(value = lang.menuBar["volume"]),
-                            leading = ft.Icon(ft.icons.VOLUME_UP_OUTLINED),
+                            leading = ft.Icon(ft.Icons.VOLUME_UP_OUTLINED),
                             on_click = openVolumePanel
                         ),
                         ft.MenuItemButton(
                             content = ft.Text(value = lang.menuBar["lyrics"]),
-                            leading = ft.Icon(ft.icons.LYRICS_OUTLINED),
+                            leading = ft.Icon(ft.Icons.LYRICS_OUTLINED),
                             on_click = lyricShow
                         ),
                         ft.SubmenuButton(
                             content = ft.Text(value = lang.menuBar["mode"]),
-                            leading = ft.Icon(ft.icons.PLAYLIST_PLAY_OUTLINED),
+                            leading = ft.Icon(ft.Icons.PLAYLIST_PLAY_OUTLINED),
                             controls = [
                                 ft.MenuItemButton(
                                     content = ft.Text(value = lang.menuBar["playInOrder"]),
-                                    leading = ft.Icon(ft.icons.PLAYLIST_PLAY_OUTLINED),
+                                    leading = ft.Icon(ft.Icons.PLAYLIST_PLAY_OUTLINED),
                                 ),
                                 ft.MenuItemButton(
                                     content = ft.Text(value = lang.menuBar["loop"]),
-                                    leading = ft.Icon(ft.icons.REPEAT_OUTLINED),
+                                    leading = ft.Icon(ft.Icons.REPEAT_OUTLINED),
                                 ),
                                 ft.MenuItemButton(
                                     content = ft.Text(value = lang.menuBar["repeat"]),
-                                    leading = ft.Icon(ft.icons.REPEAT_ONE_OUTLINED),
+                                    leading = ft.Icon(ft.Icons.REPEAT_ONE_OUTLINED),
                                 ),
                                 ft.MenuItemButton(
                                     content = ft.Text(value = lang.menuBar["shuffle"]),
-                                    leading = ft.Icon(ft.icons.SHUFFLE_OUTLINED),
+                                    leading = ft.Icon(ft.Icons.SHUFFLE_OUTLINED),
                                 )
                             ]
                         ),
                         ft.MenuItemButton(
                             content = ft.Text(value = lang.menuBar["audioInfo"]),
-                            leading = ft.Icon(ft.icons.INFO_OUTLINE),
+                            leading = ft.Icon(ft.Icons.INFO_OUTLINE),
                             on_click = openAudioInfoDlg
                         )
                     ]
@@ -736,19 +736,19 @@ def main(page):
                     controls = [
                         ft.MenuItemButton(
                             content = ft.Text(value = lang.menuBar["update"]),
-                            leading = ft.Icon(ft.icons.UPLOAD_OUTLINED),
+                            leading = ft.Icon(ft.Icons.UPLOAD_OUTLINED),
                             on_click = checkForUpdate
                         ),
                         ft.MenuItemButton(
                             content = ft.Text(value = lang.menuBar["about"]),
-                            leading = ft.Icon(ft.icons.QUESTION_MARK_OUTLINED),
+                            leading = ft.Icon(ft.Icons.QUESTION_MARK_OUTLINED),
                             on_click = openAboutDlg
                         )
                     ]
                 ),
                 windowOnTop_btn,
                 ft.IconButton(
-                        icon = ft.icons.KEYBOARD_ARROW_UP_OUTLINED,
+                        icon = ft.Icons.KEYBOARD_ARROW_UP_OUTLINED,
                         tooltip = lang.tooltips["hideMenuBar"],
                         on_click = hideShowMenuBar
                 ),
@@ -762,9 +762,9 @@ def main(page):
 
     audioCover = ft.Image(src = "./asset/track.png", width = 128, height = 128, border_radius = 8)
     audioTitle = ft.Text(audioTitleText, weight = ft.FontWeight.BOLD, size = 25, overflow = ft.TextOverflow.ELLIPSIS)
-    onlineAudioSign = ft.Icon(ft.icons.WIFI_OUTLINED, size = 16, visible = False, tooltip = lang.tooltips["onlineMusic"])
-    audioArtistAndAlbum = ft.Text(audioArtistText, size = 18, opacity = 90)
-    audioProgressStatus = ft.Text("00:00/00:00", size = 15, opacity = 90)
+    onlineAudioSign = ft.Icon(ft.Icons.WIFI_OUTLINED, size = 16, visible = False, tooltip = lang.tooltips["onlineMusic"])
+    audioArtistAndAlbum = ft.Text(audioArtistText, size = 18, opacity = 0.9)
+    audioProgressStatus = ft.Text("00:00/00:00", size = 15, opacity = 0.9)
     audioDetail = ft.Column(controls = [ft.Row(controls = [audioTitle, onlineAudioSign]), audioArtistAndAlbum, audioProgressStatus])
     audioBasicInfo = ft.Container(content = ft.Row(controls = [audioCover, audioDetail]), padding = 3)
     audioProgressBar = ft.Slider(min = 0, max = 1000, tooltip = lang.tooltips["audioPosition"], on_change_start = autoStopKeepAudioProgress, on_change_end = progressCtrl)
@@ -772,7 +772,7 @@ def main(page):
     work.playAudio.on_position_changed = autoKeepAudioProgress
     
     skipPrevious_btn = ft.IconButton(
-        icon = ft.icons.SKIP_PREVIOUS_OUTLINED,
+        icon = ft.Icons.SKIP_PREVIOUS_OUTLINED,
         tooltip = lang.tooltips["skipPrevious"],
         icon_size = 25,
         disabled = True,
@@ -780,14 +780,14 @@ def main(page):
     )
 
     playPause_btn = ft.IconButton(
-        icon = ft.icons.PLAY_CIRCLE_FILLED_OUTLINED,
+        icon = ft.Icons.PLAY_CIRCLE_FILLED_OUTLINED,
         tooltip = lang.tooltips["playOrPause"],
         icon_size = 35,
         on_click = playOrPauseMusic
     )
 
     skipNext_btn = ft.IconButton(
-        icon = ft.icons.SKIP_NEXT_OUTLINED,
+        icon = ft.Icons.SKIP_NEXT_OUTLINED,
         tooltip = lang.tooltips["skipNext"],
         icon_size = 25,
         disabled = True,
@@ -795,7 +795,7 @@ def main(page):
     )
 
     volume_btn = ft.IconButton(
-        icon = ft.icons.VOLUME_UP_OUTLINED,
+        icon = ft.Icons.VOLUME_UP_OUTLINED,
         tooltip = lang.tooltips["volume"],
         icon_size = 20,
         on_click = openVolumePanel
@@ -812,7 +812,7 @@ def main(page):
     )
     
     lyrics_btn = ft.IconButton(
-        icon = ft.icons.LYRICS,
+        icon = ft.Icons.LYRICS,
         tooltip = lang.tooltips["lyrics"],
         icon_size = 20,
         visible = True,
@@ -820,7 +820,7 @@ def main(page):
     )
 
     playInRepeat_btn = ft.IconButton(
-        icon = ft.icons.REPEAT_ONE_OUTLINED,
+        icon = ft.Icons.REPEAT_ONE_OUTLINED,
         tooltip = lang.tooltips["playRepeat"],
         icon_size = 20,
         visible = True,
@@ -828,7 +828,7 @@ def main(page):
     )
 
     audioList_btn = ft.IconButton(
-        icon = ft.icons.LIBRARY_MUSIC_OUTLINED,
+        icon = ft.Icons.LIBRARY_MUSIC_OUTLINED,
         tooltip = lang.tooltips["songList"],
         icon_size = 20,
         on_click = audioListCtrl
@@ -843,7 +843,7 @@ def main(page):
                 ft.Row(
                     controls = [
                         ft.Text(value = lang.songList["songList"], size = 20, weight = ft.FontWeight.BOLD),
-                        ft.IconButton(icon = ft.icons.CLOSE, on_click = hideAudioList)
+                        ft.IconButton(icon = ft.Icons.CLOSE, on_click = hideAudioList)
                     ],
                     alignment = ft.MainAxisAlignment.SPACE_BETWEEN,
                 ),
@@ -854,7 +854,7 @@ def main(page):
         top = 65,
         width = 300,
         height = 450,
-        bgcolor = ft.colors.SURFACE_VARIANT,
+        bgcolor = ft.Colors.ON_SURFACE_VARIANT,
         border_radius = 6,
         padding = 8,
         offset = ft.transform.Offset(-2, 0),
@@ -862,28 +862,28 @@ def main(page):
     )
     
     audioInfo_btn = ft.IconButton(
-            icon = ft.icons.INFO_OUTLINE,
+            icon = ft.Icons.INFO_OUTLINE,
             tooltip = lang.tooltips["audioInfo"],
             icon_size = 20,
             on_click = openAudioInfoDlg
         )
 
     settings_btn = ft.IconButton(
-            icon = ft.icons.SETTINGS_OUTLINED,
+            icon = ft.Icons.SETTINGS_OUTLINED,
             tooltip = lang.tooltips["settings"],
             icon_size = 20,
             on_click = displaySettings
         )
     
-    lyrics_before = ft.Text(size = 16, visible = True, color = ft.colors.GREY)
+    lyrics_before = ft.Text(size = 16, visible = True, color = ft.Colors.GREY)
     lyrics_text = ft.Text(size = 20, visible = True, weight = ft.FontWeight.BOLD)
-    lyrics_after = ft.Text(size = 16, visible = True, color = ft.colors.GREY)
+    lyrics_after = ft.Text(size = 16, visible = True, color = ft.Colors.GREY)
 
     playbackCtrl_row = ft.Row(controls = [skipPrevious_btn, playPause_btn, skipNext_btn, volume_btn, volume_panel],spacing=1)
     moreBtns_row = ft.Row(controls = [lyrics_btn, playInRepeat_btn, audioList_btn, audioInfo_btn, settings_btn])
     btns_row = ft.Row(controls = [playbackCtrl_row, moreBtns_row], alignment = ft.MainAxisAlignment.SPACE_BETWEEN)
 
-    releaseWarning = ft.Text(visible = False, size = 10, color = ft.colors.GREY)
+    releaseWarning = ft.Text(visible = False, size = 10, color = ft.Colors.GREY)
 
     if "pre" in ver:
         releaseWarning.value = "Pre-release version for testing purposes only! Current Version: " + ver
