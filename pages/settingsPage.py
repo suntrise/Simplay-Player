@@ -11,13 +11,13 @@ def transferPage(pg):
     global page
     page = pg
 
-appBar = ft.AppBar(title = ft.Row(controls = [ft.Icon(ft.icons.SETTINGS_OUTLINED), ft.Text(value = i18n.lang.sets["settings"])]))
+appBar = ft.AppBar(title = ft.Row(controls = [ft.Icon(ft.Icons.SETTINGS_OUTLINED), ft.Text(value = i18n.lang.sets["settings"])]))
 
 constructionNotice = ft.Card(
     content = ft.Container(
         content = ft.Column(controls = [
-                ft.Row(controls = [ft.Icon(ft.icons.CONSTRUCTION_OUTLINED, size = 40, color = ft.colors.AMBER)], alignment = ft.MainAxisAlignment.CENTER),
-                ft.Row(controls = [ft.Text(value = i18n.lang.sets["construction"], size = 15, color = ft.colors.AMBER, weight = ft.FontWeight.BOLD)], alignment = ft.MainAxisAlignment.CENTER)
+                ft.Row(controls = [ft.Icon(ft.Icons.CONSTRUCTION_OUTLINED, size = 40, color = ft.Colors.AMBER)], alignment = ft.MainAxisAlignment.CENTER),
+                ft.Row(controls = [ft.Text(value = i18n.lang.sets["construction"], size = 15, color = ft.Colors.AMBER, weight = ft.FontWeight.BOLD)], alignment = ft.MainAxisAlignment.CENTER)
             ]
         ),
         padding = 15
@@ -28,7 +28,7 @@ constructionNotice = ft.Card(
 settingsNotice = ft.Card(
     content = ft.Container(
         content = ft.Column(controls = [
-                ft.Row(controls = [ft.Icon(ft.icons.NOTE_OUTLINED), ft.Text(value = i18n.lang.sets["note"])])
+                ft.Row(controls = [ft.Icon(ft.Icons.NOTE_OUTLINED), ft.Text(value = i18n.lang.sets["note"])])
             ]
         ),
         padding = 15
@@ -68,7 +68,7 @@ if i18n.lang.langInfo["useKKGithub"] == True:
 languageSetCard = ft.Card(
     content = ft.Container(
         content = ft.Column(controls = [
-                ft.Row(controls = [ft.Icon(ft.icons.LANGUAGE_OUTLINED), ft.Text(value = i18n.lang.sets["language"], size = 18)]),
+                ft.Row(controls = [ft.Icon(ft.Icons.LANGUAGE_OUTLINED), ft.Text(value = i18n.lang.sets["language"], size = 18)]),
                 langSelect_dropd,
                 ft.Text(langInfoText)
             ]
@@ -111,11 +111,11 @@ colorMode_dropd = ft.Dropdown(
 colorSchemes_radio = ft.RadioGroup(
     value = "blue",
     content = ft.Row(controls = [
-            ft.Radio(value = "blue", label = i18n.lang.sets["blue"], fill_color = ft.colors.BLUE_800),
-            ft.Radio(value = "pink", label = i18n.lang.sets["pink"], fill_color = ft.colors.PINK_700),
-            ft.Radio(value = "green", label = i18n.lang.sets["green"], fill_color = ft.colors.GREEN_700),
-            ft.Radio(value = "brown", label = i18n.lang.sets["brown"], fill_color = ft.colors.BROWN),
-            ft.Radio(value = "purple", label = i18n.lang.sets["purple"], fill_color = ft.colors.DEEP_PURPLE),
+            ft.Radio(value = "blue", label = i18n.lang.sets["blue"], fill_color = ft.Colors.BLUE_800),
+            ft.Radio(value = "pink", label = i18n.lang.sets["pink"], fill_color = ft.Colors.PINK_700),
+            ft.Radio(value = "green", label = i18n.lang.sets["green"], fill_color = ft.Colors.GREEN_700),
+            ft.Radio(value = "brown", label = i18n.lang.sets["brown"], fill_color = ft.Colors.BROWN),
+            ft.Radio(value = "purple", label = i18n.lang.sets["purple"], fill_color = ft.Colors.DEEP_PURPLE),
         ]
     ),
     disabled = True
@@ -137,7 +137,7 @@ rtlEnable_switch = ft.Switch(label = i18n.lang.sets["rtl"], value = cfg.cfgData[
 appearancesSetCard = ft.Card(
     content = ft.Container(
         content = ft.Column(controls = [
-                ft.Row(controls = [ft.Icon(ft.icons.BRUSH_OUTLINED), ft.Text(value = i18n.lang.sets["appearances"], size = 18)]),
+                ft.Row(controls = [ft.Icon(ft.Icons.BRUSH_OUTLINED), ft.Text(value = i18n.lang.sets["appearances"], size = 18)]),
                 ft.Text(value = i18n.lang.sets["colorMode"]),
                 colorMode_dropd,
                 ft.Text(value = i18n.lang.sets["colorSchemes"]),
@@ -184,7 +184,7 @@ defaultVolume_slider = ft.Slider(min = 0, max = 100, divisions = 100, label = "{
 playSetCard = ft.Card(
     content = ft.Container(
         content = ft.Column(controls = [
-                ft.Row(controls = [ft.Icon(ft.icons.PLAY_ARROW_OUTLINED), ft.Text(value = i18n.lang.sets["play"], size = 18)]),
+                ft.Row(controls = [ft.Icon(ft.Icons.PLAY_ARROW_OUTLINED), ft.Text(value = i18n.lang.sets["play"], size = 18)]),
                 playImmediatelyAfterLoaded_switch,
                 defaultPlayInLoop_switch,
                 ft.Text(value = i18n.lang.sets["defaultVolume"]),
@@ -213,7 +213,7 @@ if cfg.cfgData["lyrics"][0]["lyricsDefaultVisible"] == True:
 lyricsSetCard = ft.Card(
     content = ft.Container(
         content = ft.Column(controls = [
-                ft.Row(controls = [ft.Icon(ft.icons.LYRICS_OUTLINED), ft.Text(value = i18n.lang.sets["lyrics"], size = 18)]),
+                ft.Row(controls = [ft.Icon(ft.Icons.LYRICS_OUTLINED), ft.Text(value = i18n.lang.sets["lyrics"], size = 18)]),
                 lyricsDefaultVisible_switch
             ]
         ),
@@ -238,14 +238,14 @@ onlineUpdateAPI_tf = ft.TextField(label = i18n.lang.sets["inputAPI"], visible = 
 onlineSetCard = ft.Card(
     content = ft.Container(
         content = ft.Column(controls = [
-                ft.Row(controls = [ft.Icon(ft.icons.MUSIC_NOTE_OUTLINED), ft.Text(value = i18n.lang.sets["online"], size = 18)]),
+                ft.Row(controls = [ft.Icon(ft.Icons.MUSIC_NOTE_OUTLINED), ft.Text(value = i18n.lang.sets["online"], size = 18)]),
                 ft.Text(value = i18n.lang.sets["onlineMusic"]),
-                ft.ResponsiveRow(controls = [onlineMusicAPI_tf, ft.FilledTonalButton(text = i18n.lang.sets["setToDefault"], icon = ft.icons.REFRESH_OUTLINED, on_click = setMusicAPIToDefault, disabled = True)]),
+                ft.ResponsiveRow(controls = [onlineMusicAPI_tf, ft.FilledTonalButton(text = i18n.lang.sets["setToDefault"], icon = ft.Icons.REFRESH_OUTLINED, on_click = setMusicAPIToDefault, disabled = True)]),
                 ft.Text(value = i18n.lang.sets["webAPIInfo"], selectable = True),
                 ft.Divider(),
                 ft.Text(value = i18n.lang.sets["webUpdate"]),
                 onlineSystemSets_switch,
-                ft.ResponsiveRow(controls = [onlineUpdateAPI_tf, ft.FilledTonalButton(text = i18n.lang.sets["setToDefault"], icon = ft.icons.REFRESH_OUTLINED, on_click = setMusicAPIToDefault, disabled = True, visible = False)]),
+                ft.ResponsiveRow(controls = [onlineUpdateAPI_tf, ft.FilledTonalButton(text = i18n.lang.sets["setToDefault"], icon = ft.Icons.REFRESH_OUTLINED, on_click = setMusicAPIToDefault, disabled = True, visible = False)]),
                 ft.Text(value = i18n.lang.sets["webAPIInfo"], selectable = True, visible = False) # need strings
             ]
         ),
@@ -260,7 +260,7 @@ toastNotifyEnable_switch = ft.Switch(label = i18n.lang.sets["enableToastNotify"]
 systemSetCard = ft.Card(
     content = ft.Container(
         content = ft.Column(controls = [
-                ft.Row(controls = [ft.Icon(ft.icons.DISPLAY_SETTINGS_OUTLINED), ft.Text(value = i18n.lang.sets["systemIntegration"], size = 18)]),
+                ft.Row(controls = [ft.Icon(ft.Icons.DISPLAY_SETTINGS_OUTLINED), ft.Text(value = i18n.lang.sets["systemIntegration"], size = 18)]),
                 smtcEnable_switch,
                 toastNotifyEnable_switch
             ]
@@ -274,10 +274,10 @@ systemSetCard = ft.Card(
 advanceSetCard = ft.Card(
     content = ft.Container(
         content = ft.Column(controls = [
-                ft.Row(controls = [ft.Icon(ft.icons.DANGEROUS_OUTLINED), ft.Text(value = i18n.lang.sets["advance"], size = 18)]),
+                ft.Row(controls = [ft.Icon(ft.Icons.DANGEROUS_OUTLINED), ft.Text(value = i18n.lang.sets["advance"], size = 18)]),
                 ft.Row(controls = [
-                    ft.ElevatedButton(text = i18n.lang.sets["delConfigAndClose"], icon = ft.icons.DELETE_FOREVER_OUTLINED, bgcolor = ft.colors.RED, color = ft.colors.WHITE, elevation = 0, disabled = True),
-                    ft.ElevatedButton(text = i18n.lang.sets["delLogFile"], icon = ft.icons.DELETE_OUTLINE, bgcolor = ft.colors.RED, color = ft.colors.WHITE, elevation = 0, disabled = True)
+                    ft.ElevatedButton(text = i18n.lang.sets["delConfigAndClose"], icon = ft.Icons.DELETE_FOREVER_OUTLINED, bgcolor = ft.Colors.RED, color = ft.Colors.WHITE, elevation = 0, disabled = True),
+                    ft.ElevatedButton(text = i18n.lang.sets["delLogFile"], icon = ft.Icons.DELETE_OUTLINE, bgcolor = ft.Colors.RED, color = ft.Colors.WHITE, elevation = 0, disabled = True)
                 ],
                 wrap = True
                 )
@@ -292,11 +292,11 @@ advanceSetCard = ft.Card(
 feedbackSetCard = ft.Card(
     content = ft.Container(
         content = ft.Column(controls = [
-                ft.Row(controls = [ft.Icon(ft.icons.FEEDBACK_OUTLINED), ft.Text(value = i18n.lang.sets["feedback"], size = 18)]),
+                ft.Row(controls = [ft.Icon(ft.Icons.FEEDBACK_OUTLINED), ft.Text(value = i18n.lang.sets["feedback"], size = 18)]),
                 ft.Row(controls = [
-                    ft.FilledTonalButton(text = i18n.lang.sets["bugReport"], icon = ft.icons.BUG_REPORT_OUTLINED, url = "https://github.com/WhatDamon/Simplay-Player/issues"),
-                    ft.FilledTonalButton(text = i18n.lang.sets["shareIdeas"], icon = ft.icons.STAR_OUTLINE, url = r"https://github.com/WhatDamon/Simplay-Player/discussions/categories/%E6%83%B3%E6%B3%95"),
-                    ft.FilledTonalButton(text = i18n.lang.sets["discussion"], icon = ft.icons.CHAT_OUTLINED, url = "https://github.com/WhatDamon/Simplay-Player/discussions"),
+                    ft.FilledTonalButton(text = i18n.lang.sets["bugReport"], icon = ft.Icons.BUG_REPORT_OUTLINED, url = "https://github.com/WhatDamon/Simplay-Player/issues"),
+                    ft.FilledTonalButton(text = i18n.lang.sets["shareIdeas"], icon = ft.Icons.STAR_OUTLINE, url = r"https://github.com/WhatDamon/Simplay-Player/discussions/categories/%E6%83%B3%E6%B3%95"),
+                    ft.FilledTonalButton(text = i18n.lang.sets["discussion"], icon = ft.Icons.CHAT_OUTLINED, url = "https://github.com/WhatDamon/Simplay-Player/discussions"),
                 ],
                 wrap = True
                 )

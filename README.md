@@ -15,11 +15,9 @@
 ![GitHub repo stars](https://img.shields.io/github/stars/WhatDamon/Simplay-Player)
 
 > [!IMPORTANT]  
-> 注意, 该软件在 macOS 和 Linux 下可能存在影响比较大的 BUG, 其中 Linux 下可能会遇到要求 `libmpv-1` 的问题
+> 注意, 该软件在 macOS 和 Linux 下可能存在影响比较大的 BUG
 >
-> 由于一些原因, 本项目停止积极维护, 项目所有权已经移交给@suntrise , 这不代表原作者彻底不管这个项目了, 而是作为次要维护者参与本项目, 或许未来原作者会用他正在学习的C#开发一个精神续作?
->
-> 由于flet积极维护修改了大量API接口, 导致项目需要着手部分功能的重写!
+> 由于近一年来 flet 积极维护修改了大量 API 接口, 导致项目需要着手部分功能的重写!
 
 这是一个 __闲得发慌时__ 开发出来的小作品, 写得很烂请见谅
 
@@ -31,7 +29,7 @@
 
 ## 使用前须知
 
-对于 __Linux__ 用户, 使用前需要确保安装了 `zenity`, `libmpv` 等软件包 (`libmpv` 是 Flet 硬生生强制添加的依赖, 不过在未来或许会被使用, 当前的音频播放依赖 `gstreamer`)
+对于 __Linux__ 用户, 使用前需要确保安装了 `zenity`, `libmpv` 等软件包
 
 如 __Ubuntu__ 或者 __Debian__ 用户再使用软件前执行...
 
@@ -41,33 +39,25 @@ sudo apt-get install libmpv-dev zenity
 
 __Arch__ 则通过 `pacman` 或者 AUR 安装依赖, __RHEL__ 则用 `dnf` 或 `yum` (说真的也没必要教了把...)
 
-__Windows__ 暂无额外需求, __macOS__ 尚不明确
+__Windows__、__macOS__  暂无额外需求。
 
 ## 要求
 
-__Python 3.10 及更高版本__, 推荐 3.12 及更高版本以保障其正常运行 (Action 中我们使用了 Python 3.11 进行编译测试)
+__Python 3.10 及更高版本__, 推荐 3.12 及更高版本以保障其正常运行
 
-推荐 __[Flet](https://flet.dev) 0.24.0 及更高版本__, 您可以测试一下 Simplay Player 最低它能在哪个版本可以跑起来 (由于 0.20.0 开始部分组件被修改, 样式可能有点奇怪, 将在后续解决, 部分写法将在 Flet 1.0 删除, 届时软件可能不可用)
+需要 __[Flet](https://flet.dev) 0.28.0 及更高版本__
 
-开发使用前 __*nix系统__ 需要先执行...
-
-~~~Bash
-pip install -r requirements.txt
-~~~
-
-而 __Windows__ 则需要执行...
+开发使用前 __多数情况__ 需要先执行...
 
 ~~~Bash
-pip install -r requirements_win.txt
+poetry install
 ~~~
 
-___注：区分的原因是 `Windows-Toasts` 库只能在 Windows 下生效!___
+这需要您提前安装 `Poetry`!
 
-如果希望开发 WinRT 相关内容 (如 [SMTC](https://learn.microsoft.com/zh-cn/uwp/api/windows.media.systemmediatransportcontrols)), 需要执行...
+而 __Windows__ 则可以额外安装 `Windows-Toasts`, 此库只能在 Windows 下生效
 
-~~~Bash
-pip install winsdk
-~~~
+如果希望开发 WinRT 相关内容 (如 [SMTC](https://learn.microsoft.com/zh-cn/uwp/api/windows.media.systemmediatransportcontrols)), 你可以再安装 `winsdk`!
 
 此外, 该软件 __不能在含有 CJK 文本 (即中文、日语、韩文) 的路径下正常开发与运行__!
 
@@ -76,7 +66,7 @@ pip install winsdk
 - [x] 基本逻辑
 - [x] 吐司通知 (Windows 独占性功能, 其它系统使用 `SnackBar` 替代)
 - [x] 快进与倍速播放
-- [x] GitHub Actions 自动测试编译工作流 (使用 __Nuitka__ 实现, 详见[本项目 Actions](https://github.com/WhatDamon/Simplay-Player/actions))
+- [x] ~~GitHub Actions 自动测试编译工作流 (使用 __Nuitka__ 实现, 详见[本项目 Actions](https://github.com/WhatDamon/Simplay-Player/actions))~~ (由于工具链的改变, 目前的工作流无效, 我们计划在修复完所有问题后再解决这个问题)
 - [x] 多语言支持 (基本, 目前只有美式英语 `en_US` 和简体中文 `zh_CN`, 若要贡献翻译请查看 [Wiki](https://github.com/WhatDamon/Simplay-Player/wiki/%E8%BD%AF%E4%BB%B6%E7%BF%BB%E8%AF%91))
 - [x] 日志输出 (注: 会产生大量日志信息保存在本地, 提交 issue 请附带该文件)
 - [x] 循环播放
@@ -86,20 +76,20 @@ pip install winsdk
 - [x] 检查更新 (基于 __GitHub API__, 允许在在设置中定义源)
 - [ ] 背景图片
 - [ ] 进阶逻辑
+- [ ] 背景模糊 (计划使用 [`flet_blur`](https://github.com/shiena/flet-blur))
 - [ ] 进阶播放方式选择 (目前就只支持一个单曲循环)
 - [ ] 将主界面迁移至 `pages` 中
 - [ ] 设置 (施工中, `i18n/lang.py` 的部分功能需要重构才能实现自定义语言, 其余设置还需要陆续优化完善)
 - [ ] 区间播放 (即 AB 点)
 - [ ] 系统托盘 (预计使用 `pystray` 实现, 如果实现了就可以让 `Windows-Toasts` 退役了, 毕竟功能有重叠)
 - [ ] 界面自动取色 (可能通过将图片压缩到 1x1 实现)
-- [ ] 混音器 (目前使用的组件未提供相关接口, 暂时搁置, 详见 https://github.com/flet-dev/flet/issues/2594)
+- [ ] EQ
 - [ ] SMTC 支持 (涉及 WinRT, 仅 Windows, 但实现有点麻烦, 调用代码已注释, 代码在 `lib/smtc.py`, 完成后可能会接入热词实现桌面歌词功能)
 - [ ] 任务栏进度条与按键操作 (仅 Windows 支持)
 - [ ] 多线程支持 (目前的想法只有独立检查更新线程, 其他还需要研究)
 - [ ] 拖入文件加载或命令行加载 (命令行应该会简单一点, 另外一个主要是拖入文件找不到接口)
-- [ ] 视频播放 (Flet 都引入了 `libmpv` 不可能不好好利用一下吧)
 
-对于其他可能的新功能可以到[本项目 Discussions](https://github.com/WhatDamon/Simplay-Player/discussions) 提交
+对于其他可能的新功能可以到[本项目 Discussions](https://github.com/suntrise/Simplay-Player/discussions) 提交
 
 ## 使用到的第三方项目
 

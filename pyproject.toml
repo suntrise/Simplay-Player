@@ -1,0 +1,35 @@
+[project]
+name = "simplay-player"
+version = "1.0.0"
+description = ""
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "flet (>=0.28.3,<0.29.0)",
+    "flet-audio (>=0.1.0,<0.2.0)",
+    "tinytag (>=2.1.2,<3.0.0)"
+]
+
+[tool.flet]
+app.module = "player"
+app.path = "." 
+
+[tool.flet.flutter.dependencies]
+flet_audio = "0.1.0" 
+
+compile.app = true
+compile.packages = true
+compile.cleanup = true
+
+[tool.poetry]
+package-mode = false
+
+[[tool.poetry.source]]
+name = "mirrors"
+url = "https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple/"
+priority = "primary"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

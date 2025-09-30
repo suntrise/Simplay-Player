@@ -34,6 +34,7 @@ def main(page):
     page.padding = 10
     page.title = "Simplay Player"
     page.window.center()
+    # page.window.icon = "./asset/spicon.ico"
     # page.window_title_bar_hidden = True
     log_init.logging.info("Window created")
 
@@ -272,7 +273,7 @@ def main(page):
         page.update()
 
     # 播放列表类
-    class audioTile(ft.Container):                                # ft.UserControl已经被废弃, 现在程序无法工作估计就是它的原因了
+    class audioTile(ft.UserControl): # UserControl has been deprecated, see: https://flet.dev/blog/flet-fastapi-and-async-api-improvements/#custom-controls-api-normalized
         def __init__(self, song):
             super().__init__()
             self.song = song
@@ -521,7 +522,7 @@ def main(page):
                     ft.TextButton(
                         text = lang.dialog["githubRepo"],
                         icon = ft.Icons.COLLECTIONS_BOOKMARK_OUTLINED,
-                        url = "https://github.com/suntrise/Simplay-Player/"
+                        url = "https://github.com/WhatDamon/Simplay-Player/"
                     )
                 ],
                 alignment = ft.MainAxisAlignment.END
@@ -857,8 +858,8 @@ def main(page):
         bgcolor = ft.Colors.ON_SURFACE_VARIANT,
         border_radius = 6,
         padding = 8,
-        offset = ft.transform.Offset(-2, 0),
-        animate_offset = ft.animation.Animation(300, ft.AnimationCurve.EASE_IN_OUT_CUBIC),
+        offset = ft.Offset(-2, 0),
+        animate_offset = ft.Animation(300, ft.AnimationCurve.EASE_IN_OUT_CUBIC),
     )
     
     audioInfo_btn = ft.IconButton(
@@ -930,7 +931,7 @@ if __name__ == '__main__':
             from windows_toasts import Toast, ToastDisplayImage, WindowsToaster
         except ImportError:
             toastImportError = True
-        log_init.logging.info("Lib Windows-Toasts imported")
+            log_init.logging.info("Lib Windows-Toasts import error")
         from sys import getwindowsversion
         windowsBuild = getwindowsversion().build
         log_init.logging.info("Windows build: " + str(windowsBuild))

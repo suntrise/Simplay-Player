@@ -1,4 +1,5 @@
 import flet as ft
+import flet_audio as ft_audio
 import tinytag, time, base64, requests, json
 from lib import log_init, cfg, platform_check
 
@@ -318,7 +319,7 @@ def stateSet(e):
     audioStateType = e.data
     log_init.logging.info("State changed:" + e.data) 
 
-playAudio = ft.Audio(
+playAudio = ft_audio.Audio(
     autoplay = False,
     volume = cfg.cfgData["play"][0]["defaultVolume"] / 100,
     balance = 0,
