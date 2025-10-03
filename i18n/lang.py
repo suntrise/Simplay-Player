@@ -7,7 +7,7 @@ from i18n import en_US, zh_CN
 
 log_init.logging.info("Imported language files")
 
-langCode = locale.getdefaultlocale()[0] # DeprecationWarning: 'locale.getdefaultlocale' is deprecated and slated for removal in Python 3.15. Use setlocale(), getencoding() and getlocale() instead.
+langCode = locale.getlocale()[0] # DeprecationWarning: 'locale.getdefaultlocale' is deprecated and slated for removal in Python 3.15. Use setlocale(), getencoding() and getlocale() instead.
 
 log_init.logging.info("Get default locale: " + langCode)
 
